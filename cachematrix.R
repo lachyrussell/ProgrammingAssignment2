@@ -6,7 +6,7 @@ makeCacheMatrix <- function(x = matrix()) {
   
   inverse <- NULL #initialise inverse
   
-  #overwrite existing matrix?
+  #Want to overwrite existing cached matrix?
   #e.g. 
   #my_matrix <- makeCacheMatrix(matrix(1:4, 2, 2))
   #my_matrix$set(matrix(4:7, 2, 2))
@@ -15,8 +15,8 @@ makeCacheMatrix <- function(x = matrix()) {
     x <<- y
     inverse <<- NULL #initialise inverse again
   }
-
-    get <- function() x
+  
+  get <- function() x
   
   
   setinverse <- function(inv) {inverse <<- inv
@@ -31,15 +31,19 @@ makeCacheMatrix <- function(x = matrix()) {
 #then the cachesolve should retrieve the inverse from the cache.
 
 cacheSolve <- function(x=makeCacheMatrix(matrix(4:7, 2, 2)),...) {
-    
-    inverse <- x$getinverse()
-    if(!is.null(inverse)) {
-      message("getting cached data")
-      return(inverse)
-    }
-    data <- x$get()
-    inverse <- solve(data, ...)
-    x$setinverse(inverse)
-    inverse
+  
+  #is the inverse for this matrix already cached?
+  #if so
+  inverse <- x$getinverse()
+  if(!is.null(inverse)) {
+    message("getting cached data")
+    return(inverse)
+  }
+  
+  #if not
+  data <- x$get()
+  inverse <- solve(data, ...)
+  x$setinverse(inverse)
+  inverse
 }
 
