@@ -1,0 +1,15 @@
+my_matrix <- makeCacheMatrix(matrix(1:4, 2, 2))
+my_matrix$get()
+my_matrix$getinverse()
+cacheSolve(my_matrix)
+cacheSolve(my_matrix)
+my_matrix$getinverse()
+
+#my_matrix <- makeCacheMatrix(matrix(4:7, 2, 2))
+my_matrix$set(matrix(4:7, 2, 2))
+my_matrix$get()
+my_matrix$getinverse()
+cacheSolve(my_matrix)
+cacheSolve(my_matrix)
+my_matrix$getinverse()
+
